@@ -19,7 +19,17 @@ import (
 	"github.com/ong-gtp/go-chat/services/rabbitmq"
 )
 
+func init() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		stdlog.Fatalf("Error loading .env file: %v", err)
+	}
+}
+
 func main() {
+	stdlog.Println("RMQ_USERNAME:", os.Getenv("RMQ_USERNAME"))
+	stdlog.Println("RMQ_PASSWORD:", os.Getenv("RMQ_PASSWORD"))
+
 	if err := run(); err != nil {
 		fmt.Fprintf(os.Stderr, "%v", err)
 		os.Exit(1)
